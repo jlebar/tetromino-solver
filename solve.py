@@ -11,7 +11,16 @@ tile_map = {
 }
 
 def rotate_90(rot):
-    return tuple((-y, x) for (x, y) in rot)
+    """
+    >>> rotate_90(((0, 0), (1, 0), (2, 0), (3, 0)))
+    ((0, 0), (0, 1), (0, 2), (0, 3))
+    >>> rotate_90(((0, 0), (0, 1), (0, 2), (0, 3)))
+    ((0, 0), (1, 0), (2, 0), (3, 0))
+    """
+    r = tuple((-y, x) for (x, y) in rot)
+    min_x = min(x for (x, y) in r)
+    min_y = min(y for (x, y) in r)
+    return tuple(sorted((x - min_x, y - min_y) for (x, y) in r))
 
 rotations_map = {}
 for tile in tile_map.keys():
@@ -79,7 +88,12 @@ def solve(width, height, tiles):
     l l j j t t t t
     l l j j t t t t
 
-    #>>> solve(5, 8, ['l', 'o', 's', 't', 't', 'i', 'i', 'o', 'l', 's'])
+    >>> solve(8, 5, ['l', 'o', 's', 't', 't', 'i', 'i', 'o', 'l', 's'])
+    l l s t t t s l
+    l s s t t s s l
+    l s t t t s l l
+    o o i i i i o o
+    o o i i i i o o
 
     """
     board = [['' for h in range(height)] for w in range(width)]
