@@ -88,13 +88,18 @@ def solve(width, height, tiles):
     l l j j t t t t
     l l j j t t t t
 
-    >>> solve(8, 5, ['l', 'o', 's', 't', 't', 'i', 'i', 'o', 'l', 's'])
-    l l s t t t s l
-    l s s t t s s l
-    l s t t t s l l
+    >>> solve(8, 5, ['l', 'o', 's', 't', 't', 'i', 'i', 'o', 'j', 'z'])
+    l l s t t t z z
+    l s s t t z z j
+    l s t t t j j j
     o o i i i i o o
     o o i i i i o o
 
+    >>> solve(10, 4, ['l', 'o', 's', 't', 't', 'i', 'i', 'o', 'l', 'z'])
+    l l s s t t t l l l
+    l o o s s t o o z l
+    l o o t t t o o z z
+    i i i i t i i i i z
     """
     board = [['' for h in range(height)] for w in range(width)]
     if not solve_recursive(board, tiles):
